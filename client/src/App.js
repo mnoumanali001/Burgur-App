@@ -1,7 +1,11 @@
+import AppContextProvider from "./context/AppContextProvider";
+import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
   return (
-    <h1>Getting Started</h1>
-  )
-}
-export default App
+    <AppContextProvider>
+      <AppRoutes />
+    </AppContextProvider>
+  );
+};
+export default App;
