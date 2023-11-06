@@ -1,0 +1,26 @@
+.order {
+  width: 80%;
+  height: 130px;
+  box-shadow: 0 2px 3px #ccc;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  border: 1px solid #eee;
+  margin-bottom: 15px;
+}
+.order-items {
+  display: flex;
+  align-items: center;
+}
+.order-item-ing {
+  border: 1px solid rgb(204, 204, 204);
+  padding: 2px 5px;
+  font-size: 0.9rem;
+}
+.order-items > p {
+  margin-right: 30px;
+}
+.bold {
+  font-weight: bold;
+}

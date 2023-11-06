@@ -9,7 +9,7 @@ import { burgurOptions } from "../../constants/burgurOptions";
 
 function OrderForm() {
   const navigate = useNavigate();
-  const { burgurOpt, setBurgurOpt, setOrder, burgurPrice } =
+  const { burgurOpt, setBurgurOpt, setOrder, burgurPrice, setBurgurPrice } =
     useContext(AppContext);
   const formik = useFormik({
     initialValues: {
@@ -53,6 +53,7 @@ function OrderForm() {
             count: [],
           },
         ]);
+        setBurgurPrice(4);
         setOrder((prev) => [burgerData, ...prev]);
         navigate("/orders");
       } catch (error) {
