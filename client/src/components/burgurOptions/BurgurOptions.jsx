@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/AppContextProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BurgurItem from "./BurgurItem";
 import "./burguroptions.css";
+import { getLoggedUser } from "../../utils/user";
 
 function BurgurOptions() {
   const { burgurPrice, burgurOpt, setBurgurOpt } = useContext(AppContext);
+  const navigate = useNavigate();
+  const data = getLoggedUser();
   return (
     <div className="burgur-option-container">
       <p>
@@ -17,16 +20,29 @@ function BurgurOptions() {
           return <BurgurItem item={item} key={i} index={i} />;
         })}
       </div>
-      <Link
-        className={
-          burgurPrice === 4
-            ? "signin-order-link block-btn"
-            : "signin-order-link"
-        }
-        to="/checkout"
-      >
-        Sign In to Order
-      </Link>
+      {!data ? (
+        <Link
+          className={
+            burgurPrice === 4
+              ? "signin-order-link block-btn"
+              : "signin-order-link"
+          }
+          to="/auth"
+        >
+          Sign In to Order
+        </Link>
+      ) : (
+        <p
+          className={
+            burgurPrice === 4
+              ? "signin-order-link block-btn"
+              : "signin-order-link"
+          }
+          onClick={() => navigate("/checkout")}
+        >
+          Order
+        </p>
+      )}
     </div>
   );
 }

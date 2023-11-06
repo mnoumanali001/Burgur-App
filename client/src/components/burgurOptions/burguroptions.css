@@ -61,3 +61,6 @@
   text-decoration: none;
   color: #966909;
 }
+.signin-order-link:hover {
+  opacity: 0.8;
+}
