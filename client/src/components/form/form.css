@@ -35,9 +35,14 @@
 }
 .switch-btn {
   color: #703b09;
+  cursor: pointer;
+}
+.switch-btn:hover, .auth-action-btn:hover{
+  opacity: 0.8;
 }
 .auth-action-btn {
   color: #5c9210;
+  cursor: pointer;
 }
 .block-auth {
   color: #cccccc;
@@ -53,4 +58,11 @@ select {
   width: 100%;
   box-sizing: border-box;
   border: 1px solid #cccccc;
+}
+.place-order{
+  cursor: pointer;
+  opacity: 0.8;
+}
+.place-order:hover{
+  opacity: 1;
 }

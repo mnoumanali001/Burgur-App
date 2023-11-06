@@ -1,18 +1,43 @@
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import { useFormik } from "formik";
 import { authSchema } from "../../schema/schema";
 import "./form.css";
+import { login, signup } from "../../api";
+import { setUser } from "../../utils/user";
 
 function AuthForm() {
   const [loginCheck, setLogin] = useState(true);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: authSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      if(loginCheck)
+      {
+        try {
+          const {data} = await login(values);
+          // save to local storage
+          setUser(data)
+          navigate("/");
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      else
+      {
+        try {
+          const {data} = await signup(values);
+          // save to local storage
+          setUser(data)
+          navigate("/");
+        } catch (error) {
+          console.log(error)
+        }
+      }
     },
   });
   return (
@@ -50,10 +75,11 @@ function AuthForm() {
             ? "auth-action-btn block-auth"
             : "auth-action-btn"
         }
+        onClick={formik.handleSubmit}
       >
         {loginCheck ? "Sign in" : "Sign up"}
       </p>
-      <p className="switch-btn" onClick={() => setLogin(!loginCheck)}>
+      <p className="switch-btn" onClick={() => setLogin(prev => !prev)}>
         Switch to {loginCheck ? "Sign up" : "Sign in"}
       </p>
     </div>

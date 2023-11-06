@@ -1,8 +1,16 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { orderSchema } from "../../schema/schema";
+import { createOrder } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { getLoggedUser } from "../../utils/user";
+import { AppContext } from "../../context/AppContextProvider";
+import { burgurOptions } from "../../constants/burgurOptions";
 
 function OrderForm() {
+  const navigate = useNavigate();
+  const { burgurOpt, setBurgurOpt, setOrder, burgurPrice } =
+    useContext(AppContext);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -13,8 +21,43 @@ function OrderForm() {
       type: "",
     },
     validationSchema: orderSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const { id } = getLoggedUser();
+
+        const burgerData = {};
+        burgurOpt.forEach((option) => {
+          burgerData[option.name] = option.count.length;
+        });
+        burgerData["price"] = burgurPrice;
+        const { resp } = await createOrder(id, values, burgerData);
+        setBurgurOpt([
+          {
+            name: "Salad",
+            price: 0.5,
+            count: [],
+          },
+          {
+            name: "Bacon",
+            price: 0.7,
+            count: [],
+          },
+          {
+            name: "Cheese",
+            price: 0.4,
+            count: [],
+          },
+          {
+            name: "Meat",
+            price: 1.3,
+            count: [],
+          },
+        ]);
+        setOrder((prev) => [burgerData, ...prev]);
+        navigate("/orders");
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
   return (
@@ -98,7 +141,9 @@ function OrderForm() {
         </select>
       </div>
 
-      <p>Complete Order</p>
+      <p className="place-order" onClick={formik.handleSubmit}>
+        Complete Order
+      </p>
     </div>
   );
 }
