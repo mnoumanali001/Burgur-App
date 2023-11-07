@@ -15,7 +15,7 @@ function AuthForm() {
       password: "",
     },
     validationSchema: authSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, {setFieldError}) => {
       if(loginCheck)
       {
         try {
@@ -24,7 +24,12 @@ function AuthForm() {
           setUser(data)
           navigate("/");
         } catch (error) {
-          console.log(error)
+          if(error?.response?.data)
+          {
+            const err = error.response.data;
+            const fields = Object.keys(err);
+            setFieldError(`${fields[0]}`, `${err[fields[0]]}`);
+          }
         }
       }
       else
@@ -35,7 +40,12 @@ function AuthForm() {
           setUser(data)
           navigate("/");
         } catch (error) {
-          console.log(error)
+          if(error?.response?.data)
+          {
+            const err = error.response.data;
+            const fields = Object.keys(err);
+            setFieldError(`${fields[0]}`, `${err[fields[0]]}`);
+          }
         }
       }
     },

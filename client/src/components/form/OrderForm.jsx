@@ -29,7 +29,7 @@ function OrderForm() {
         burgurOpt.forEach((option) => {
           burgerData[option.name] = option.count.length;
         });
-        burgerData["price"] = burgurPrice;
+        burgerData["price"] = burgurPrice.toFixed(2);
         const { resp } = await createOrder(id, values, burgerData);
         setBurgurOpt([
           {
