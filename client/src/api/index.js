@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = axios.create({ baseURL: "http://mnoumanali-001-site1.etempurl.com" });
+const API = axios.create({ baseURL: "http://nouman001-001-site1.btempurl.com" });
 
 API.interceptors.request.use((req) => {
   const data = "";
