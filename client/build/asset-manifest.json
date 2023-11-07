@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Burgur-App/static/css/main.4e8274d7.css",
-    "main.js": "/Burgur-App/static/js/main.fa0e58fa.js",
+    "main.js": "/Burgur-App/static/js/main.ddb83224.js",
     "static/media/logo.png": "/Burgur-App/static/media/logo.ec69c7f65e6d7565759f.png",
     "index.html": "/Burgur-App/index.html",
     "main.4e8274d7.css.map": "/Burgur-App/static/css/main.4e8274d7.css.map",
-    "main.fa0e58fa.js.map": "/Burgur-App/static/js/main.fa0e58fa.js.map"
+    "main.ddb83224.js.map": "/Burgur-App/static/js/main.ddb83224.js.map"
   },
   "entrypoints": [
     "static/css/main.4e8274d7.css",
-    "static/js/main.fa0e58fa.js"
+    "static/js/main.ddb83224.js"
   ]
 }
